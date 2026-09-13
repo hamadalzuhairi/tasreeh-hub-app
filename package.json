@@ -1,0 +1,14 @@
+{
+  "name": "tasreeh-hub",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "api:dev": "pnpm --filter @tasreeh/api dev",
+    "mobile:start": "pnpm --filter @tasreeh/mobile start",
+    "db:push": "pnpm --filter @tasreeh/api db:push",
+    "db:seed": "pnpm --filter @tasreeh/api db:seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

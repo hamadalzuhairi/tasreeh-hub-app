@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.local
+.env*.local
+dist/
+.next/
+.expo/
+.expo-shared/
+*.log
+.DS_Store
+.turbo/
+android/
+ios/
+.vercel/
+*.tsbuildinfo
