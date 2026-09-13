@@ -66,9 +66,10 @@ pnpm --filter @tasreeh/api smoke-test
 pnpm mobile:start
 ```
 
-Scan the QR code with Expo Go, or press `a`/`i` for an emulator/simulator. If testing on a
-physical device, update `extra.apiUrl` in `apps/mobile/app.json` to your machine's LAN IP
-(not `localhost`) so the device can reach the API.
+Scan the QR code with Expo Go, or press `a`/`i` for an emulator/simulator. By default the app
+talks to the deployed API (`extra.apiUrl` in `apps/mobile/app.json`,
+https://tasreeh-hub-api.vercel.app). To use a local API instead, create `apps/mobile/.env` with
+`EXPO_PUBLIC_API_URL=http://localhost:3000` (use your machine's LAN IP on a physical device).
 
 ## Demoing the SLA escalation flow
 
@@ -83,7 +84,12 @@ Then log in as `admin@tasreeh.sa` to see the escalation notification.
 
 ## Deploying
 
-- `apps/api` deploys to Vercel as-is (`vercel.json` configures the SLA-check cron). Set the
-  same env vars from `.env` in the Vercel project settings.
+- `apps/api` is live at https://tasreeh-hub-api.vercel.app (Vercel project `tasreeh-hub-api`,
+  root directory `apps/api`, env vars set in the project). `vercel.json` runs the SLA-check cron
+  once a day (the Hobby plan limit); trigger it manually for demos as shown above.
+- Deploy from a clean export of the pushed commit: on the Hobby plan Vercel blocks CLI deploys
+  whose git commit author doesn't match the account, so run `vercel deploy --prod` from a
+  `git archive HEAD` copy that includes the `.vercel` folder.
+- Check a deployment with `BASE_URL=https://tasreeh-hub-api.vercel.app pnpm --filter @tasreeh/api smoke-test`.
 - `apps/mobile` ships via EAS Build/Submit when ready; for now `expo start` + Expo Go is enough
   for the hackathon demo.

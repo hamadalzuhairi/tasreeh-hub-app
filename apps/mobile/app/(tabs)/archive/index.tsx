@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { REQUEST_TYPE_LABELS_AR, type RequestType } from "@tasreeh/shared";
@@ -24,7 +24,16 @@ export default function ArchiveScreen() {
   const [year, setYear] = useState("all");
   const departments = useDepartments();
 
+  // Filter the list while typing (debounced so each keystroke doesn't hit the API);
+  // submitting still opens the dedicated search results screen.
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search.trim()), 350);
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const archive = useArchive({
+    q: debouncedSearch || undefined,
     filter,
     departmentId: departmentId === "all" ? undefined : departmentId,
     year: year === "all" ? undefined : year,
