@@ -6,6 +6,9 @@ import { handleRouteError, ok } from "@/lib/http/respond";
 import { scopeRequests } from "@/lib/reports/scope";
 import type { DepartmentPerformance } from "@tasreeh/shared";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const auth = requireAuth(req);

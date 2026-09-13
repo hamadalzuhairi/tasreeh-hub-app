@@ -8,6 +8,9 @@ import { ApiHttpError, handleRouteError, ok } from "@/lib/http/respond";
 import { serializeUser } from "@/lib/serializers";
 import type { User } from "@tasreeh/shared";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const auth = requireAuth(req);

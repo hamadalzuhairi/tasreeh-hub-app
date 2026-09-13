@@ -7,6 +7,9 @@ import { handleRouteError, ok } from "@/lib/http/respond";
 import { serializeNotification } from "@/lib/serializers";
 import type { Notification } from "@tasreeh/shared";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const auth = requireAuth(req);

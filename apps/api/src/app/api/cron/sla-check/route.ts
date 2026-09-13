@@ -5,6 +5,9 @@ import { requests } from "@/lib/db/schema";
 import { createEscalation } from "@/lib/sla/escalate";
 import { ApiHttpError, handleRouteError, ok } from "@/lib/http/respond";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 // Called by Vercel Cron (see vercel.json) or manually during a demo to force an
 // overdue-request sweep without waiting on real cron timing.
 export async function GET(req: NextRequest) {

@@ -8,6 +8,9 @@ import { getPeriodBounds, hoursBetween, parsePeriodDays, pctDelta } from "@/lib/
 import { scopeRequests } from "@/lib/reports/scope";
 import type { ReportSummary } from "@tasreeh/shared";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 type Row = typeof requests.$inferSelect;
 
 function avgResponseHours(set: Row[]) {

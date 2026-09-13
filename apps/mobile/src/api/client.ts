@@ -2,7 +2,11 @@ import Constants from "expo-constants";
 import type { ApiResponse } from "@tasreeh/shared";
 import { getToken } from "../auth/token-storage";
 
-const API_URL = (Constants.expoConfig?.extra?.apiUrl as string | undefined) || "http://localhost:3000";
+// EXPO_PUBLIC_API_URL (e.g. http://localhost:3000 in apps/mobile/.env) overrides the deployed API in app.json.
+const API_URL =
+  process.env.EXPO_PUBLIC_API_URL ||
+  (Constants.expoConfig?.extra?.apiUrl as string | undefined) ||
+  "http://localhost:3000";
 
 export class ApiError extends Error {
   code: string;

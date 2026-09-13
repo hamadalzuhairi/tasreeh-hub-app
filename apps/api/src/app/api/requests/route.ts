@@ -11,6 +11,9 @@ import { computeSlaDueAt } from "@/lib/sla/compute";
 import { createNotification } from "@/lib/notifications/create";
 import { GENERAL_DEPARTMENT_NAME_AR, type MediaRequest } from "@tasreeh/shared";
 
+// Reads auth headers per request; never prerender at build time.
+export const dynamic = "force-dynamic";
+
 const createSchema = z.object({
   type: z.enum(["statement", "inquiry", "interview", "other"]),
   subject: z.string().min(3).max(200),

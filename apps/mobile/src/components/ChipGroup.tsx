@@ -20,7 +20,9 @@ export function ChipGroup<T extends string>({ options, value, onChange, stretch 
       <Pressable
         key={option.key}
         onPress={() => onChange(option.key)}
-        style={[styles.chip, stretch && styles.chipStretch, selected ? styles.selected : styles.unselected]}
+        // Segments share the row in proportion to their label length so a long label like
+        // "قيد المعالجة (8)" isn't truncated while short ones get less room.
+        style={[styles.chip, stretch && [styles.chipStretch, { flex: option.label.length }], selected ? styles.selected : styles.unselected]}
       >
         <AppText
           weight={selected ? "bold" : "medium"}
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   rowReverse: { flexDirection: "row-reverse", gap: spacing.sm },
   scrollRow: { flexDirection: "row", gap: spacing.sm, flexGrow: 1, justifyContent: "flex-end" },
   chip: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 12 },
-  chipStretch: { flex: 1, paddingHorizontal: 6 },
+  chipStretch: { paddingHorizontal: 6 },
   selected: { backgroundColor: colors.accent },
   unselected: { backgroundColor: colors.surfaceAlt },
 });
