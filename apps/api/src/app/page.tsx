@@ -1,8 +1,8 @@
+import { redirect } from "next/navigation";
+
+// The API has no UI of its own; anyone opening the bare domain is sent to the app website.
+const APP_URL = process.env.APP_URL || "https://tasreeh-hub.vercel.app";
+
 export default function Home() {
-  return (
-    <main style={{ fontFamily: "sans-serif", padding: 24 }}>
-      <h1>Tasreeh Hub API</h1>
-      <p>This Next.js app only serves the JSON API under /api/* for the Expo mobile app.</p>
-    </main>
-  );
+  redirect(APP_URL);
 }

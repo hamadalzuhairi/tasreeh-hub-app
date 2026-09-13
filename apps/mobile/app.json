@@ -33,7 +33,7 @@
       "expo-splash-screen"
     ],
     "extra": {
-      "apiUrl": "https://tasreeh-hub-api.vercel.app"
+      "apiUrl": "https://tasreeh-hub-api-ashen.vercel.app"
     }
   }
 }
